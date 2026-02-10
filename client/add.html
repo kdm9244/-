@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>add</title>
+  </head>
+  <body>
+    <div>
+      <h1>과일농장</h1>
+      <div>로그,이미지</div>
+      <div>
+        <form
+          action="http://localhost:3000/client/add"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <input type="file" name="fruit_img" id="upload" accept="image/*" />
+          <ul>
+            <li>
+              <label>상품명</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="상품이름을 써주세요"
+                required
+              />
+            </li>
+            <li>
+              <label>가격</label>
+              <input type="text" name="price" required />
+            </li>
+            <li>
+              <label>재고</label>
+              <input type="text" name="stock" required />
+            </li>
+            <li>
+              <label>상품설명</label>
+              <input type="text" name="des" />
+            </li>
+          </ul>
+          <button type="submit">등록</button>
+          <a href="/client/add.html">취소</a>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
