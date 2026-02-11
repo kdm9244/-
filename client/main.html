@@ -4,19 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>메인화면</title>
+    <link rel="stylesheet" href="/client/css/common.css" />
+    <link rel="stylesheet" href="/client/css/main.css" />
+    <style>
+      #modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border: 1px solid black;
+        padding: 20px;
+        list-style: none;
+      }
+    </style>
   </head>
-  <style>
-    #modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      border: 1px solid black;
-      padding: 20px;
-    }
-  </style>
   <body>
     <div id="container">
       <h1>과일농장</h1>
@@ -29,20 +32,21 @@
         <label>검색</label>
         <input type="text" />
         <button type="button" id="search">검색</button>
-        <a href="/client/add">상품등록</a>
+        <a href="/client/add.html">상품등록</a>
       </div>
       <div>
         <h2>상품검색</h2>
         <caption>
           상품
         </caption>
-        <table>
+        <table id="product-table">
           <thead>
             <tr>
               <th>ID</th>
               <th>이미지</th>
               <th>이름</th>
               <th>가격</th>
+              <th>재고</th>
               <th>설명</th>
               <th>관리</th>
             </tr>
@@ -52,7 +56,7 @@
       </div>
     </div>
     <div id="modal">
-      <h3>상품 수정</h3>
+      <h3>상품수정</h3>
 
       <input type="hidden" id="editId" />
 

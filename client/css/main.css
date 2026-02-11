@@ -1,0 +1,55 @@
+/* 상단 검색바 영역 */
+.search-area {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+}
+
+input[type="text"] {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+/* 테이블 디자인 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #2ecc71;
+  padding: 12px;
+  color: #555;
+}
+
+td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+tr:hover {
+  background-color: #fdfdfd;
+}
+
+/* 이미지 동그랗게 */
+td img {
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* 수정/삭제 버튼 */
+button[onclick*="edit"] {
+  background: #3498db;
+  color: white;
+  padding: 5px 10px;
+}
+button[onclick*="delete"] {
+  background: #e74c3c;
+  color: white;
+  padding: 5px 10px;
+}
