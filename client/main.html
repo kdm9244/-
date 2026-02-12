@@ -6,173 +6,90 @@
     <title>메인화면</title>
     <link rel="stylesheet" href="/client/css/common.css" />
     <link rel="stylesheet" href="/client/css/main.css" />
-    <style>
-      #modal {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        border: 1px solid black;
-        padding: 20px;
-        list-style: none;
-      }
-    </style>
+    <link rel="stylesheet" href="/client/css/modal.css" />
   </head>
   <body>
+    <header id="top-nav">
+    <div class="nav-container">
+      <div class="logo-area">
+      <a href="/client/main.html">
+      <img src="/img/회사로고2.png" alt="회사로고"></a>
+    </div>
+    <nav class="menu-area">
+      <ul>
+        <li><a href="/client/main.html">상품페이지</a>
+        </li>
+        <li><a href="/client/add.html">상품등록페이지</a>
+        </li>
+        </ul>
+      </nav>
+    </div>
+    </header>
     <div id="container">
       <h1>과일농장</h1>
-
-      <div>
-        <h2>상품페이지</h2>
-        <img src="/img/귤.jpg" alt="회사로고" />
+      <p>"매일 아침 농장에서 갓 수확한 싱싱한 결실을 만나보세요."</p>
+      <div class="top-bar">
+        <form class="search-box" id="search-form">
+          <input type="text" class="search-input" id="search" placeholder="상품명을 입력하세요" />
+          <button type="submit" >검색</button>
+        </form>
+        <a href="/client/add.html" class="add-link">상품등록</a>
       </div>
-      <div>
-        <label>검색</label>
-        <input type="text" />
-        <button type="button" id="search">검색</button>
-        <a href="/client/add.html">상품등록</a>
-      </div>
-      <div>
-        <h2>상품검색</h2>
-        <caption>
-          상품
-        </caption>
-        <table id="product-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>이미지</th>
-              <th>이름</th>
-              <th>가격</th>
-              <th>재고</th>
-              <th>설명</th>
-              <th>관리</th>
-            </tr>
-          </thead>
-          <tbody id="list"></tbody>
-        </table>
-      </div>
+      <div id="product-list" class="product-grid"></div>
     </div>
+
     <div id="modal">
-      <h3>상품수정</h3>
-
-      <input type="hidden" id="editId" />
-
-      <!-- <input type="file" name="fruit_img" id="upload" accept="image/*" /> -->
+      <h3>상품 정보 수정</h3> <input type="hidden" id="editId">
       <ul>
         <li>
-          <label>이름</label>
-          <input type="text" id="editName" />
+          <input
+            type="text"
+            name="editName"
+            id="editName"
+            placeholder="상품이름을 써주세요"
+            required/>
         </li>
-        <li>
-          <label>가격</label>
-          <input type="number" id="editNumber" />
-        </li>
-        <li>
-          <label>재고</label>
-          <input type="number" id="editStock" />
-        </li>
-        <li>
-          <label>설명</label>
-          <input type="text" id="editDes" />
-        </li>
-      </ul>
-      <button type="button" onclick="update()">수정</button>
-      <button type="button" onclick="closeModal()">취소</button>
+          <li>
+            <input
+              type="number"
+              name="editPrice"
+              id="editPrice"
+              placeholder="가격"
+              required/>
+           </li>
+            <li>
+            <input
+              type="number"
+              name="editStock"
+              id="editStock"
+              placeholder="재고" 
+              required/>
+            </li>
+            <li>
+            <textarea
+              name="editDes"
+              id="editDes"
+              class="des-input"
+              placeholder="상세설명을 작성해주세요"></textarea>
+              </li>
+              </ul>
+          
+            <div class="modal-footer">
+              <button type ="button" onclick="update()">수정</button>
+              <button type ="button" onclick="closeModal()">취소</button>
+            </div>
+          
+        </div>
     </div>
-    <script>
-      fetch("http://localhost:3000/project/1")
-        .then((resp) => resp.json())
-        .then((data) => {
-          data.forEach((elem) => {
-            const tr = makeRow(elem);
-            document.querySelector("#list").appendChild(tr);
-          });
-        });
+    <div id="pagination" class ="pagination-container"></div>
+    <script src='/client/js/ui.js'></script>
+    <script src='/client/js/delete.js'></script>
+    <script src='/client/js/edit.js'></script>
+    <script src='/client/js/paging.js'></script>
+    <script src='/client/js/search.js'></script>
 
-      function makeRow(elem) {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-        <td>${elem.ID}</td>
-        <td>
-          <img src="http://localhost:3000/uploads/${elem.IMG}" width="50">
-        </td>
-        <td>${elem.NAME}</td>
-        <td>${elem.PRICE}</td>
-        <td>${elem.STOCK}</td>
-        <td>${elem.DES}</td>
-        <td>
-          <button onclick="editProduct(this,${elem.ID})">수정</button>
-          <button onclick="deleteProduct(this,${elem.ID})">삭제</button>
-          </td>
-      `;
-        return tr;
-      }
-      function deleteProduct(btn, ID) {
-        fetch(`http://localhost:3000/project_delete/${ID}`)
-          .then((resp) => resp.json())
-          .then((data) => {
-            console.log(data);
-            if (data.retCode == "OK") {
-              const tr = btn.parentElement.parentElement;
-              tr.remove();
-            } else {
-              alert("삭제실패");
-            }
-          })
-          .catch((err) => {
-            console.error("에러 발생:", err);
-          });
-      }
-
-      // 1. 수정창 열기 및 데이터 세팅
-      function editProduct(btn, ID) {
-        const tr = btn.parentElement.parentElement;
-
-        // 값 배달
-        document.getElementById("editId").value = ID;
-        document.getElementById("editName").value = tr.cells[2].innerText;
-        document.getElementById("editNumber").value = tr.cells[3].innerText;
-        document.getElementById("editStock").value = tr.cells[4].innerText;
-        document.getElementById("editDes").value = tr.cells[5].innerText;
-
-        // 창 열기
-        document.getElementById("modal").style.display = "block";
-      }
-
-      // 2. 창 닫기
-      function closeModal() {
-        document.getElementById("modal").style.display = "none";
-      }
-
-      // 3. 서버에 데이터 전송
-      function update() {
-        const ID = document.getElementById("editId").value;
-        const updateData = {
-          name: document.getElementById("editName").value,
-          price: document.getElementById("editNumber").value,
-          stock: document.getElementById("editStock").value,
-          des: document.getElementById("editDes").value,
-        };
-
-        fetch(`http://localhost:3000/project_update/${ID}`, {
-          method: "POST", // app.js의 라우터와 일치해야 함
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(updateData),
-        })
-          .then((resp) => resp.json())
-          .then((data) => {
-            if (data.retCode == "OK") {
-              alert("수정 완료!"); // 사용자 확인용 알림 추가 권장
-              location.reload();
-            } else {
-              alert("수정 실패");
-            }
-          })
-          .catch((err) => console.error("에러:", err));
-      }
-    </script>
+  <script>
+    
+  </script>
   </body>
 </html>

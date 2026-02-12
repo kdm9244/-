@@ -1,55 +1,166 @@
-/* 상단 검색바 영역 */
-.search-area {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  justify-content: flex-end;
+/* 그리드 컨테이너 */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
 }
 
-input[type="text"] {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+/* 개별 상품 카드 */
+.product-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(46, 204, 113, 0.1); /* 미세한 초록 테두리 */
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
 }
 
-/* 테이블 디자인 */
-table {
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(39, 174, 96, 0.15);
+}
+
+/* 카드 이미지 영역 */
+.card-img {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th {
+  height: 200px;
+  overflow: hidden;
   background-color: #f8f9fa;
-  border-bottom: 2px solid #2ecc71;
-  padding: 12px;
-  color: #555;
 }
 
-td {
-  padding: 15px;
-  border-bottom: 1px solid #eee;
-  text-align: center;
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율 유지하며 꽉 채움 */
 }
 
-tr:hover {
-  background-color: #fdfdfd;
+/* 카드 본문 (이름, 가격 등) */
+.card-body {
+  padding: 20px;
+  flex-grow: 1;
 }
 
-/* 이미지 동그랗게 */
-td img {
-  border-radius: 8px;
-  object-fit: cover;
+.card-body .name {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #2c3e50;
 }
 
-/* 수정/삭제 버튼 */
-button[onclick*="edit"] {
-  background: #3498db;
+/* 가격과 재고 색상 포인트 */
+.card-body .price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #e67e22; /* 과일의 상큼함이 느껴지는 오렌지색 */
+}
+
+.card-body .stock {
+  display: inline-block;
+  background-color: #e8f8f0; /* 연한 초록 배경 */
+  color: #27ae60;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.card-body .des {
+  font-size: 0.95rem;
+  color: #666;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 두 줄 넘어가면 말줄임표 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  line-clamp: 2;
+}
+
+/* 카드 하단 버튼 영역 */
+.card-footer {
+  padding: 15px 20px;
+  background: #fdfdfd;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 12px; /* 버튼 사이 간격을 조금 더 넓힘 */
+}
+
+.card-footer button {
+  flex: 1; /* ★중요: 버튼이 사용 가능한 공간을 꽉 채우도록 설정 */
+  padding: 12px 5px; /* 위아래 여백을 늘려 버튼을 크게 만듦 */
+  border-radius: 10px;
+  font-size: 1rem; /* 글자 크기를 조금 키움 */
+  font-weight: bold; /* 글자를 두껍게 하여 가독성 향상 */
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  /* 글자가 잘리거나 삐져나가지 않게 처리 */
+  white-space: nowrap; /* 글자가 줄바꿈되지 않게 함 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-footer .btn-delete {
+  background-color: #fff0f0; /* 삭제 버튼도 부드러운 파스텔톤 */
+  color: #ff7675;
+}
+
+.card-footer button:first-child {
+  /* 수정 버튼 */
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+.card-footer .btn-delete:hover {
+  background-color: #ff7675;
   color: white;
-  padding: 5px 10px;
 }
-button[onclick*="delete"] {
-  background: #e74c3c;
+
+.card-footer button:last-child {
+  /* 삭제 버튼 */
+  background-color: #ff7675;
   color: white;
-  padding: 5px 10px;
+}
+
+.card-footer button:hover {
+  opacity: 0.8;
+}
+
+#pagination {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center;
+  margin: 40px 0; /* 위아래 여백 */
+  gap: 8px; /* 버튼 사이 간격 */
+}
+
+/* 기본 버튼 스타일 */
+#pagination button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px; /* 살짝 둥글게 */
+  cursor: pointer;
+  transition: all 0.2s ease; /* 부드러운 효과 */
+}
+
+/* 마우스를 올렸을 때 */
+#pagination button:hover {
+  background-color: #f0f0f0;
+  border-color: #bbb;
+}
+
+/* 현재 선택된 페이지 버튼 (활성화 상태) */
+#pagination button.active {
+  background-color: #4caf50; /* 과일농장과 어울리는 초록색 */
+  color: white;
+  border-color: #4caf50;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

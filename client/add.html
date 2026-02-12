@@ -4,45 +4,97 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>add</title>
+    <link rel="stylesheet" href="/client/css/common.css" />
+    <link rel="stylesheet" href="/client/css/add.css" />
   </head>
   <body>
-    <div>
-      <h1>과일농장</h1>
-      <div>로그,이미지</div>
-      <div>
-        <form
-          action="http://localhost:3000/client/add"
-          method="post"
-          enctype="multipart/form-data"
-        >
-          <input type="file" name="fruit_img" id="upload" accept="image/*" />
+    <header id="top-nav">
+      <div class="nav-container">
+        <div class="logo-area">
+          <a href="/client/main.html">
+            <img src="/img/회사로고2.png" alt="회사로고"
+          /></a>
+        </div>
+        <nav class="menu-area">
           <ul>
-            <li>
-              <label>상품명</label>
-              <input
-                type="text"
-                name="name"
-                placeholder="상품이름을 써주세요"
-                required
-              />
-            </li>
-            <li>
-              <label>가격</label>
-              <input type="text" name="price" required />
-            </li>
-            <li>
-              <label>재고</label>
-              <input type="text" name="stock" required />
-            </li>
-            <li>
-              <label>상품설명</label>
-              <input type="text" name="des" />
-            </li>
+            <li><a href="/client/main.html">상품페이지</a></li>
+            <li><a href="/client/add.html">상품등록페이지</a></li>
           </ul>
-          <button type="submit">등록</button>
-          <a href="/client/add.html">취소</a>
+        </nav>
+      </div>
+    </header>
+    <div id="container">
+      <h1>과일농장</h1>
+      <p>"매일 아침 농장에서 갓 수확한 싱싱한 결실을 만나보세요."</p>
+      <div class="add-card">상품 등록</div>
+      <div>
+        <form id="event">
+          <div class="form-content">
+            <div class="image-upload-section">
+              <p class="section-title">과일 이미지</p>
+              <div class="upload-box">
+                <div class="preview-area">
+                  <span class="icon">사진</span>
+                  <img id="img-preview" src="" style="display: none" />
+                </div>
+                <label for="upload" class="upload-btn">사진 올리기</label>
+                <input
+                  type="file"
+                  name="fruit_img"
+                  id="upload"
+                  accept="image/*"
+                  hidden
+                />
+              </div>
+            </div>
+            <div class="details-section">
+              <p class="section-title">상품 상세 정보</p>
+              <ul>
+                <li>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="상품이름을 써주세요"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    type="number"
+                    name="price"
+                    id="price"
+                    placeholder="가격"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    type="number"
+                    name="stock"
+                    id="stock"
+                    placeholder="재고"
+                    required
+                  />
+                </li>
+                <li>
+                  <textarea
+                    name="des"
+                    id="des"
+                    class="des-input"
+                    placeholder="상세설명을 작성해주세요"
+                  ></textarea>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="save-btn">등록</button>
+            <a href="/client/main.html" class="cancel-btn">취소</a>
+          </div>
         </form>
       </div>
     </div>
+    <script src="/client/js/submit.js"></script>
   </body>
 </html>
