@@ -13,7 +13,7 @@ document.querySelector("#search-form").addEventListener("submit", (e) => {
 
   searchInput.value = "";
 
-  fetch(`http://localhost:3000/project/search`, {
+  fetch(`http://192.168.0.39:3000/project/search`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ keyword: keyword }),

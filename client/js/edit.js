@@ -30,7 +30,7 @@ function update() {
   formData.append("stock", document.getElementById("editStock").value);
   formData.append("des", document.getElementById("editDes").value);
 
-  fetch(`http://localhost:3000/project/update/${ID}`, {
+  fetch(`http://192.168.0.39:3000/project/update/${ID}`, {
     method: "POST",
     body: formData,
   }).then((resp) => {

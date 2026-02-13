@@ -1,10 +1,11 @@
 //삽입
 function makeCard(elem) {
+  const SERVER_URL = "http://192.168.0.39:3000";
   const card = document.createElement("div");
   card.className = "product-card";
   card.innerHTML = `
         <div class="card-img">
-          <img src="http://localhost:3000/uploads/${elem.IMG}" alt="${elem.NAME}">
+          <img src="${SERVER_URL}/uploads/${elem.IMG}">
         </div>
         <div class ="card-body">
           <h3 class ="name">${elem.NAME}</h3>

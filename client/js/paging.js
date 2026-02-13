@@ -4,7 +4,7 @@ let current_page = 1;
 function loadProducts(page = 1) {
   current_page = page;
 
-  fetch(`http://localhost:3000/project/${page}`)
+  fetch(`http://192.168.0.39:3000/project/${page}`)
     .then((resp) => resp.json())
     .then((data) => {
       const productList = document.querySelector("#product-list");

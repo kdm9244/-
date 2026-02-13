@@ -12,7 +12,7 @@ document.querySelector("#event").addEventListener("submit", (e) => {
   formData.append("stock", document.querySelector("#stock").value);
   formData.append("des", document.querySelector("#des").value);
 
-  fetch("http://localhost:3000/project/add", {
+  fetch("http://192.168.0.39:3000/project/add", {
     method: "POST",
     body: formData,
   }).then((resp) => {
